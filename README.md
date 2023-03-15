@@ -29,9 +29,17 @@
   Caleb & Ung - Figma (design framework), styling
   Ivan - javascript
   Steve - 
-  Chris -
+  Chris - 
 
 # Schedule
  Ivan - free every morning before class and every night, sunday available all day <br />
  Caleb - Free always lol
  
+ # Milestones
+  - Thursday - wireframe, familiarize with Foundation css framework
+  - Sunday - Discord meeting on progress, able to dsisplay API data on page
+  - Monday - build page styling and layout from wireframe
+  - Tuesday - moving toward Javascript functionality
+  - Thursday - polishing APP, debugging
+  - Sunday - Debug further and Presentation prep
+  - Monday - Go over presentation before class, present for 10 mins (5 min demo, 5 min questions)
