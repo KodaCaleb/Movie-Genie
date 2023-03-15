@@ -32,4 +32,4 @@
   Chris -
 
 # Schedule
- 
+ Ivan - free every morning before class and every night, sunday available all day
