@@ -34,5 +34,6 @@
 # Schedule
  Ivan - free every morning before class and every night, sunday available all day <br />
  Caleb - Free always lol
+ 
  Steve - Monday - Friday after 5pm, Open Saturday & Sunday 
  
