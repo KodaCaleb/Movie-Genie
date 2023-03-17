@@ -1,0 +1,18 @@
+.genre-section {
+    display: grid;
+}
+
+.title {
+    display: flex;
+}
+
+.search-button-section{
+    display: flex;
+
+}
+
+.button{
+    border-radius: 20px !important;
+    margin-top: 10px !important;
+}
+
