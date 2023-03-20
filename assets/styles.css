@@ -1,13 +1,27 @@
+*{
+    font-family: 'Roboto', sans-serif !important;
+
+}
+
+
+
 .genre-section {
     display: grid;
 }
 
 .title {
     display: flex;
-    
+    padding-bottom: 25px;
+}
+
+.title-text{
+    font-weight: 300;
+    color: #1779bad2;
+    font-size: 60px;
 }
 
 .search-button-section{
+    padding-top: 25px;
     display: flex;
 
 }
