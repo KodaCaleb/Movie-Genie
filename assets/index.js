@@ -1,8 +1,7 @@
 var tableBody = document.getElementById('movieResultsTable')
 var searchButton = document.getElementById('searchButton')
 
-function getApi() {
-  var 
-}
+function getApi() 
+
 
 searchButton.addEventListener('click', getApi)
