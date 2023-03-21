@@ -44,5 +44,5 @@
   - Sunday - Debug further and Presentation prep
   - Monday - Go over presentation before class, present for 10 mins (5 min demo, 5 min questions)
   added dev
-
+ - everyone gets cake
 
