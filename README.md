@@ -29,11 +29,12 @@
   Caleb & Ung - Figma (design framework), styling
   Ivan - javascript
   Steve - 
-  Chris - 
+  Chris - logo, javascript, assisting overseeing files
 
 # Schedule
  Ivan - free every morning before class and every night, sunday available all day <br />
  Caleb - Free always lol
+ Chris - Free all the time, if setup in advance!
  
  # Milestones
   - Thursday - wireframe, familiarize with Foundation css framework
