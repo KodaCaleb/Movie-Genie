@@ -5,3 +5,4 @@ function getApi()
 
 
 searchButton.addEventListener('click', getApi)
+
