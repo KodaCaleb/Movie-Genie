@@ -88,3 +88,12 @@
     max-width: 30%;
     margin-right: 10px;
 }
+
+.button-group-wrapper {
+    display: inline-grid;
+    text-align: center;
+}
+
+.genre-section {
+    display: grid;
+}
