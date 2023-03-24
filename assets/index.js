@@ -12,7 +12,7 @@ const sortButtons = document.querySelectorAll('.sort-button');
 
 // Array to store the selected genres
 let selectedGenres = [];
-// Array to store the selected sort 
+// String to store the selected sort 
 let selectedSort = '';
 
 // Add a click event listener to each genre button
@@ -36,25 +36,25 @@ sortButtons.forEach((button) => {
         // Toggle the 'selected' class on the button
         button.classList.toggle('selected');
         // give string value
-        let listSort = button.textContent;
+        let selectedSort = button.textContent;
 
-        console.log(listSort)
+        console.log(selectedSort)
 
         // check string value/replace with url string
-        if (listSort.includes('Pop Movies')) {
-            listSort = 'most_pop_movies';
+        if (selectedSort.includes('Popular Movies')) {
+            selectedSort = 'most_pop_movies';
         }
-        else if (listSort.includes('Top Movies')) {
-            listSort = 'top_rated_english_250';
+        else if (selectedSort.includes('Top Movies')) {
+            selectedSort = 'top_rated_english_250';
         }
-        else if (listSort.includes('In Theaters')) {
-            listSort = 'top_boxoffice_last_weekend_10';
+        else if (selectedSort.includes('In Theaters')) {
+            selectedSort = 'top_boxoffice_last_weekend_10';
         }
-        else if (listSort.includes('Stinkers')) {
-            listSort = 'top_rated_lowest_100';
+        else if (selectedSort.includes('Stinkers')) {
+            selectedSort = 'top_rated_lowest_100';
         }
 
-        console.log(listSort)
+        console.log(selectedSort)
 
         // Add or remove the genre from the selectedGenres array
         // if (selectedSort.includes(listSort)) {
@@ -78,10 +78,10 @@ searchButton.addEventListener('click', async () => {
     const genreQuery = selectedGenres.map((genre) => `&genre=${encodeURIComponent(genre)}`).join('');
     // Construct the list sort query string
     //const listSortQuery = selectedSort.map((listSort) => `&list=${encodedURIComponent(listSort)}`).join('');
-    
+    const sortQuery = '&list=' + selectedSort;
     // Create the Movie Database API URL with query parameters
-    const apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}`;
-        // ${listSortQuery}
+    const apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}${sortQuery}`;
+        // 
     // Define options for the API request
     const options = {
         method: 'GET',
@@ -112,10 +112,10 @@ searchButton.addEventListener('click', async () => {
             movieCard.classList.add('list-el', 'callout', 'secondary');
 
             // Create and set the movie poster element
-            const poster = document.createElement('img');
-            poster.classList.add('movie-poster');
-            poster.src = movie.primaryImage.url;
-            poster.alt = movie.titleText.text;
+            // const poster = document.createElement('img');
+            // poster.classList.add('movie-poster');
+            // poster.src = movie.primaryImage.url;
+            // poster.alt = movie.titleText.text;
 
             // Create and set the movie title element
             const title = document.createElement('h3');
@@ -128,7 +128,7 @@ searchButton.addEventListener('click', async () => {
             description.textContent = `Release Year: ${movie.releaseYear.year}`;
 
             // Append the poster, title, and description to the movie card
-            movieCard.appendChild(poster);
+//            movieCard.appendChild(poster);
             movieCard.appendChild(title);
             movieCard.appendChild(description);
 
