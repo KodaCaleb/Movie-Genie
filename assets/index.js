@@ -1,14 +1,19 @@
-// API key and host for the movies database
+// API key and host for the movies database & streaming availability
 const apiKey = '56b9500ae6msh95c67a302f2b6e8p1c367fjsna89523e75e53';
 const apiHost = 'moviesdatabase.p.rapidapi.com';
+//const apiKey2 = '56b9500ae6msh95c67a302f2b6e8p1c367fjsna89523e75e53';
+const apiHost2 = 'streaming-availability.p.rapidapi.com';
 
 // References to the HTML elements
 const genreButtons = document.querySelectorAll('.genre-button');
 const searchButton = document.getElementById('search');
 const listContainer = document.getElementById('list');
+const sortButtons = document.querySelectorAll('.sort-button');
 
 // Array to store the selected genres
 let selectedGenres = [];
+// String to store the selected sort 
+let selectedSort = '';
 
 // Add a click event listener to each genre button
 genreButtons.forEach((button) => {
@@ -25,22 +30,58 @@ genreButtons.forEach((button) => {
         }
     });
 });
+//event listener for sort buttons
+sortButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // Toggle the 'selected' class on the button
+        button.classList.toggle('selected');
+        // give string value
+        let selectedSort = button.textContent;
+
+        console.log(selectedSort)
+
+        // check string value/replace with url string
+        if (selectedSort.includes('Popular Movies')) {
+            selectedSort = 'most_pop_movies';
+        }
+        else if (selectedSort.includes('Top Movies')) {
+            selectedSort = 'top_rated_english_250';
+        }
+        else if (selectedSort.includes('In Theaters')) {
+            selectedSort = 'top_boxoffice_last_weekend_10';
+        }
+        else if (selectedSort.includes('Stinkers')) {
+            selectedSort = 'top_rated_lowest_100';
+        }
+
+        console.log(selectedSort)
+
+        // Add or remove the genre from the selectedGenres array
+        // if (selectedSort.includes(listSort)) {
+        //     selectedSort = selectedListSort.filter((g) => g !== listSort);
+        // } else {
+        //     selectedSort.push(listSort);
+        // }
+    });
+});
 
 // Add a click event listener to the search button
 searchButton.addEventListener('click', async () => {
     
     // If no genres are selected, alert the user and return early
-    if (selectedGenres.length === 0) {
-        alert('Please select at least one genre.');
+    if (selectedGenres.length === 0 || selectedGenres.length > 1) {
+        alert('Please select one genre.');
         return;
     }
 
     // Construct the genre query string
     const genreQuery = selectedGenres.map((genre) => `&genre=${encodeURIComponent(genre)}`).join('');
-    
-    // Create the API URL with query parameters
-    const apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}&list=most_pop_movies`;
-
+    // Construct the list sort query string
+    //const listSortQuery = selectedSort.map((listSort) => `&list=${encodedURIComponent(listSort)}`).join('');
+    const sortQuery = '&list=' + selectedSort;
+    // Create the Movie Database API URL with query parameters
+    const apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}${sortQuery}`;
+        // 
     // Define options for the API request
     const options = {
         method: 'GET',
@@ -56,6 +97,8 @@ searchButton.addEventListener('click', async () => {
         const response = await fetch(apiUrl, options);
         const data = await response.json();
 
+        console.log(data.results)
+
         // Extract movie results from the data object
         const movies = data.results;
 
@@ -69,10 +112,10 @@ searchButton.addEventListener('click', async () => {
             movieCard.classList.add('list-el', 'callout', 'secondary');
 
             // Create and set the movie poster element
-            const poster = document.createElement('img');
-            poster.classList.add('movie-poster');
-            poster.src = movie.primaryImage.url;
-            poster.alt = movie.titleText.text;
+            // const poster = document.createElement('img');
+            // poster.classList.add('movie-poster');
+            // poster.src = movie.primaryImage.url;
+            // poster.alt = movie.titleText.text;
 
             // Create and set the movie title element
             const title = document.createElement('h3');
@@ -85,7 +128,7 @@ searchButton.addEventListener('click', async () => {
             description.textContent = `Release Year: ${movie.releaseYear.year}`;
 
             // Append the poster, title, and description to the movie card
-            movieCard.appendChild(poster);
+//            movieCard.appendChild(poster);
             movieCard.appendChild(title);
             movieCard.appendChild(description);
 
