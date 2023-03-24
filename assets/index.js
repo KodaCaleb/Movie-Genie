@@ -69,7 +69,7 @@ sortButtons.forEach((button) => {
 searchButton.addEventListener('click', async () => {
     
     // If no genres are selected, alert the user and return early
-    if (selectedGenres.length === 0 || selectedGenres.length < 1) {
+    if (selectedGenres.length === 0 || selectedGenres.length > 1) {
         alert('Please select one genre.');
         return;
     }
