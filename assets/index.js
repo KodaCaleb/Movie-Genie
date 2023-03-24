@@ -58,7 +58,7 @@ sortButtons.forEach((button) => {
         else if (selectedSort.includes('In Theaters')) {
             selectedSort = 'top_boxoffice_last_weekend_10';
         }
-        else if (selectedSort.includes('Stinkers')) {
+        else if (selectedSort.includes('🤢Stinkers🤢')) {
             selectedSort = 'top_rated_lowest_100';
         }
 
