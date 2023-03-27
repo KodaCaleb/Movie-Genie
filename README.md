@@ -1,49 +1,24 @@
-# Project-1
+# Movie Genie README
 
-# App ideas
-
-1 - resturant randomizer
-  - displays resturants based on preferences
-  - displays if theyre open
-  - will randomly choose one based on your filters when you can't decide 
-
-2 - movie recommendations - Zach vetted 
-  - input form with genres
-  - filters will display a list of movies
-  - display streaming services where movie is available to watch 
-  - display movie times
-  - 
-
-3 - gas price info
-  - shows prices around your zip code
-
-# App components
-  - Movie APIs from rapid api database
-    - utelly (https://rapidapi.com/utelly/api/utelly/)
-    - MoviesDatabase (https://rapidapi.com/SAdrian/api/moviesdatabase/tutorials/moviesdatabase-documentation)
-  - Foundation CSS framework 
+## Description
+This is a fully functional movie recommendation web application that gives you movies to watch, and where to watch them. The application was built using HTML, CSS, Foundation CSS Famework, Javascript, jQuery, The Movie Database API, and the Streaming Availability API.
 
 
+## Usage
+To use this application, select the genre and sorting options you would like to use, then click the search button to generate a list of movies and where to watch them.
 
-# Roles
-  Caleb & Ung - Figma (design framework), styling
-  Ivan - javascript
-  Steve - 
-  Chris - logo, javascript, assisting overseeing files
+## Link to deployed site
 
-# Schedule
- Ivan - free every morning before class and every night, sunday available all day <br />
- Caleb - Free always lol
- Chris - Free all the time, if setup in advance!
- 
- # Milestones
-  - Thursday - wireframe, familiarize with Foundation css framework
-  - Sunday - Discord meeting on progress, able to dsisplay API data on page
-  - Monday - build page styling and layout from wireframe
-  - Tuesday - moving toward Javascript functionality
-  - Thursday - polishing APP, debugging
-  - Sunday - Debug further and Presentation prep
-  - Monday - Go over presentation before class, present for 10 mins (5 min demo, 5 min questions)
-  added dev
- - everyone gets cake
+https://kodacaleb.github.io/Project-1/
 
+## Link to github repo
+
+https://github.com/KodaCaleb/Project-1
+
+## screenshot of deployed application
+
+![Screenshot](./Assets/MovieGenieSC.png)
+
+
+## License
+please refer to license in repo
