@@ -71,10 +71,10 @@ searchButton.addEventListener('click', async () => {
 
     // If no genres are selected, alert the user and return early
     if (selectedGenres.length === 0) {
-        alert('Please select one genre.');
+        const modal = document.querySelector('#error-modal');
+        modal.style.display = 'block';
         return;
     }
-
     // Construct the genre query string
     const genreQuery = selectedGenres.map((genre) => `&genre=${encodeURIComponent(genre)}`).join('');
     const sortQuery = '&list=' + selectedSort;
@@ -131,3 +131,10 @@ searchButton.addEventListener('click', async () => {
                 console.error(err);
             }
         });
+        
+//Clears the error, of no genre selected
+const closeButton = document.querySelector('.close-button');
+closeButton.addEventListener('click', () => {
+const modal = document.querySelector('#error-modal');
+modal.style.display = 'none';
+        });        

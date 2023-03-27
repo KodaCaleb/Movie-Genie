@@ -97,3 +97,11 @@
 .genre-section {
     display: grid;
 }
+.reveal {
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    text-align: center;
+    position: fixed;
+    border-radius: 15px;
+  }
