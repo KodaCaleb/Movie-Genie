@@ -1,5 +1,5 @@
 // API key and host for the movies database & streaming availability
-const apiKey = '551e3a1a7bmsh16830716239e258p1fd012jsnce1fadd1306f';
+const apiKey = '23a236a5b5msh24ce8ba5cf5619ap1aba3bjsn78c3d934c5be';
 const apiHost = 'moviesdatabase.p.rapidapi.com';
 const apiHost2 = 'streaming-availability.p.rapidapi.com';
 
@@ -148,6 +148,27 @@ searchButton.addEventListener('click', async () => {
                 title.classList.add('movie-title');
                 title.textContent = data2.result.originalTitle;
                 
+                const platforms = data2.result.streamingInfo.us;
+                const availability = document.createElement('p');
+                availability.classList.add('platforms');
+                
+                // Extract the platform names and join them with a comma and a space
+                const platformNames = Object.keys(platforms)
+                    .map(platformKey => {
+                        // Capitalize the first letter of the platform name
+                        return platformKey.charAt(0).toUpperCase() + platformKey.slice(1);
+                    })
+                    .join(', ');
+                
+                // Check if there are any platforms available
+                if (platformNames.length > 0) {
+                    availability.textContent = `Available on: ${platformNames}`;
+                } else {
+                    availability.textContent = 'Not available on any platform.';
+                }
+                
+                movieCard.appendChild(availability);
+                console.log(platforms);
 
                 // Create and set the movie description element if year exist
                 const releaseYear = movie.releaseYear
@@ -158,6 +179,7 @@ searchButton.addEventListener('click', async () => {
                     movieCard.appendChild(description);
                 }
 
+                
                 // create and set movie poster image if image exist
                 const posterURl = movie.primaryImage
                 if (posterURl) {
@@ -167,7 +189,7 @@ searchButton.addEventListener('click', async () => {
                     poster.alt = movie.titleText.text;
                     movieCard.appendChild(poster);
                 }
-            
+                
                 // Append the title and description to the movie card
                 movieCard.appendChild(title);
                 
