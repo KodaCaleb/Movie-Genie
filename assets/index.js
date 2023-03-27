@@ -118,10 +118,18 @@ searchButton.addEventListener('click', async () => {
                     const description = document.createElement('p');
                     description.classList.add('movie-description');
                     description.textContent = `Release Year: ${movie.releaseYear.year}`;
+
+                    if (movie.primaryImage.url) {
+                    var poster = document.createElement('img');
+                    poster.classList.add('movie-poster');
+                    poster.src = movie.primaryImage.url;
+                    poster.alt = movie.titleText.text;
+                    }
         
                     // Append the title and description to the movie card
                     movieCard.appendChild(title);
                     movieCard.appendChild(description);
+                    movieCard.appendChild(poster);
         
                     // Append the movie card to the list container
                     listContainer.appendChild(movieCard);
