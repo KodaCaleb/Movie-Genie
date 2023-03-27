@@ -14,6 +14,8 @@ let selectedGenres = [];
 // String to store the selected sort
 let selectedSort = '';
 
+let data2;
+
 // Add a click event listener to each genre button
 genreButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -115,7 +117,7 @@ searchButton.addEventListener('click', async () => {
         // Clear the list container's inner HTML
         listContainer.innerHTML = '';
 
-        let movies2;
+        
 
         // Iterate through the movie results
         movies.forEach((movie) => {
@@ -128,48 +130,76 @@ searchButton.addEventListener('click', async () => {
             console.log(imdbQuery)
             let apiUrl2 = `https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us${imdbQuery}`
 
-            fetch(apiUrl2, options2)
-            .then((response) => response.json())
-            .then((data) => console.log(data))
-            
-            
-        
-            // Create a movie card element
-            let movieCard = document.createElement('div');
-            movieCard.classList.add('list-el', 'callout', 'secondary');
-
-            // Create and set the movie title element
-            const title = document.createElement('h3');
-            title.classList.add('movie-title');
-            //title.textContent = movies2.originalTitle;
-        
-
-            // Create and set the movie description element if year exist
-            const releaseYear = movie.releaseYear
-            if (releaseYear) {
-                var description = document.createElement('p');
-                description.classList.add('movie-description');
-                description.textContent = `Release Year: ${movie.releaseYear.year}`;
-                movieCard.appendChild(description);
+            async function fetchData() {
+                const response = await fetch(apiUrl2, options2);
+                data2 = await response.json();
             }
 
-            // create and set movie poster image if image exist
-            const posterURl = movie.primaryImage
-            if (posterURl) {
-                var poster = document.createElement('img');
-                poster.classList.add('movie-poster');
-                poster.src = movie.primaryImage.url;
-                poster.alt = movie.titleText.text;
-                movieCard.appendChild(poster);
-            }
-        
-            // Append the title and description to the movie card
-            movieCard.appendChild(title);
-            
-            
+            fetchData()
+            .then(() => {
+                console.log(data2);
 
-            // Append the movie card to the list container
-            listContainer.appendChild(movieCard);
+                // Create a movie card element
+                let movieCard = document.createElement('div');
+                movieCard.classList.add('list-el', 'callout', 'secondary');
+
+                // Create and set the movie title element
+                const title = document.createElement('h3');
+                title.classList.add('movie-title');
+                title.textContent = data2.result.originalTitle;
+                
+
+                // Create and set the movie description element if year exist
+                const releaseYear = movie.releaseYear
+                if (releaseYear) {
+                    var description = document.createElement('p');
+                    description.classList.add('movie-description');
+                    description.textContent = `Release Year: ${movie.releaseYear.year}`;
+                    movieCard.appendChild(description);
+                }
+
+                // create and set movie poster image if image exist
+                const posterURl = movie.primaryImage
+                if (posterURl) {
+                    var poster = document.createElement('img');
+                    poster.classList.add('movie-poster');
+                    poster.src = movie.primaryImage.url;
+                    poster.alt = movie.titleText.text;
+                    movieCard.appendChild(poster);
+                }
+            
+                // Append the title and description to the movie card
+                movieCard.appendChild(title);
+                
+                
+
+                // Append the movie card to the list container
+                listContainer.appendChild(movieCard);
+
+
+
+
+
+
+
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+
+
+
+            // fetch(apiUrl2, options2)
+            // .then((response) => response.json())
+            // .then((data) => {
+            //     console.log(data);
+            //     //assign data to the data2 variable
+            //     data2 = data;
+            // })
+            
+            
+        
+            
                 });
             } catch (err) {
                 // Log any errors to the console
