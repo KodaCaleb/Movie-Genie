@@ -52,7 +52,7 @@ sortButtons.forEach((button) => {
 
         console.log(selectedSort);
 
-        if (selectedSort.includes('Top Movies')) {
+        if (selectedSort.includes('🎬Top Movies🎬')) {
             selectedSort = 'top_rated_english_250';
         }
         // else if (selectedSort.includes('In Theaters')) {
