@@ -25,6 +25,7 @@ genreButtons.forEach((button) => {
         // Add the 'selected' class to the clicked button
         button.classList.add('selected');
 
+
         const genre = button.textContent;
 
         // Set the selectedGenres array to contain only the clicked genre
@@ -48,11 +49,12 @@ sortButtons.forEach((button) => {
 
         console.log(selectedSort);
 
-        // Replace the selectedSort string value with the corresponding URL string
-        if (selectedSort.includes('Popular Movies')) {
-            selectedSort = 'most_pop_movies';
-        }
-        else if (selectedSort.includes('Top Movies')) {
+        // Replace the selectedSort string value with the corresponding URL string 
+        // *popular movies was set to default apiUrl to present current movies if no sort was selected
+        // if (selectedSort.includes('Popular Movies')) {
+        //     selectedSort = 'most_pop_movies';
+        // }
+        if (selectedSort.includes('Top Movies')) {
             selectedSort = 'top_rated_english_250';
         }
         else if (selectedSort.includes('In Theaters')) {
@@ -77,9 +79,13 @@ searchButton.addEventListener('click', async () => {
 
     // Construct the genre query string
     const genreQuery = selectedGenres.map((genre) => `&genre=${encodeURIComponent(genre)}`).join('');
-    const sortQuery = '&list=' + selectedSort;
-    // Create the Movie Database API URL with query parameters
-    const apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}${sortQuery}`;
+    let apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie&list=most_pop_movies${genreQuery}`;
+
+    if (selectedSort) {
+        const sortQuery = '&list=' + selectedSort;
+        // Create the Movie Database API URL with both query parameters
+        apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}${sortQuery}`;
+    }
 
     // Define options for the API request
     const options = {
@@ -99,37 +105,44 @@ searchButton.addEventListener('click', async () => {
         console.log(data.results);
                 // Extract movie results from the data object
                 const movies = data.results;
-
+                
                 // Clear the list container's inner HTML
                 listContainer.innerHTML = '';
-        
+
                 // Iterate through the movie results
                 movies.forEach((movie) => {
                     // Create a movie card element
                     const movieCard = document.createElement('div');
                     movieCard.classList.add('list-el', 'callout', 'secondary');
-        
+
                     // Create and set the movie title element
                     const title = document.createElement('h3');
                     title.classList.add('movie-title');
                     title.textContent = movie.titleText.text;
-        
-                    // Create and set the movie description element
-                    const description = document.createElement('p');
-                    description.classList.add('movie-description');
-                    description.textContent = `Release Year: ${movie.releaseYear.year}`;
 
-                    if (movie.primaryImage.url) {
-                    var poster = document.createElement('img');
-                    poster.classList.add('movie-poster');
-                    poster.src = movie.primaryImage.url;
-                    poster.alt = movie.titleText.text;
+                    // Create and set the movie description element if year exist
+                    const releaseYear = movie.releaseYear
+                    if (releaseYear) {
+                        var description = document.createElement('p');
+                        description.classList.add('movie-description');
+                        description.textContent = `Release Year: ${movie.releaseYear.year}`;
+                        movieCard.appendChild(description);
+                    }
+
+                    // create and set movie poster image if image exist
+                    const posterURl = movie.primaryImage
+                    if (posterURl) {
+                        var poster = document.createElement('img');
+                        poster.classList.add('movie-poster');
+                        poster.src = movie.primaryImage.url;
+                        poster.alt = movie.titleText.text;
+                        movieCard.appendChild(poster);
                     }
         
                     // Append the title and description to the movie card
                     movieCard.appendChild(title);
-                    movieCard.appendChild(description);
-                    movieCard.appendChild(poster);
+                    
+                    
         
                     // Append the movie card to the list container
                     listContainer.appendChild(movieCard);
