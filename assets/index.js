@@ -1,5 +1,5 @@
 // API key and host for the movies database & streaming availability
-const apiKey = '23a236a5b5msh24ce8ba5cf5619ap1aba3bjsn78c3d934c5be';
+const apiKey = '619d592825msh3bf237760eaf2f7p1e67e9jsna523dc0f7eff';
 const apiHost = 'moviesdatabase.p.rapidapi.com';
 const apiHost2 = 'streaming-availability.p.rapidapi.com';
 
