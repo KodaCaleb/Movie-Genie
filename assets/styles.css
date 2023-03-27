@@ -2,6 +2,12 @@
     font-family: 'Roboto', sans-serif !important;
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
 .genre-section {
     display: grid;
 }
@@ -102,6 +108,12 @@
     flex-direction: row;
     margin-top: auto;
     text-align: center;
-    position: fixed;
+    position: relative;
     border-radius: 15px;
-  }
+    
+}
+
+#error-modal{
+    transform: translateY(-110px);
+    
+}
