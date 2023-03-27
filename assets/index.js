@@ -28,6 +28,7 @@ genreButtons.forEach((button) => {
 
         const genre = button.textContent;
 
+        
         // Set the selectedGenres array to contain only the clicked genre
         selectedGenres = [genre];
     });
@@ -87,7 +88,7 @@ searchButton.addEventListener('click', async () => {
         apiUrl = `https://moviesdatabase.p.rapidapi.com/titles?titleType=movie${genreQuery}${sortQuery}`;
     }
 
-    // Define options for the API request
+    // Define options for the API request 1
     const options = {
         method: 'GET',
         headers: {
@@ -96,56 +97,84 @@ searchButton.addEventListener('click', async () => {
         }
     };
 
+    const options2 = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': apiKey,
+            'X-RapidAPI-Host': apiHost2
+        }
+    };
+
     // Perform the API request and display the results
     try {
-        // Fetch data from the API and await response and JSON data
-        const response = await fetch(apiUrl, options);
-        const data = await response.json();
+        // Fetch data from the APIs and await response and JSON data
+        const response1 = await fetch(apiUrl, options);
+        const data1 = await response1.json();
 
-        console.log(data.results);
-                // Extract movie results from the data object
-                const movies = data.results;
+        
+
+        console.log(data1.results);
+        // Extract movie results from the data object
+        const movies = data1.results;
                 
-                // Clear the list container's inner HTML
-                listContainer.innerHTML = '';
+        // Clear the list container's inner HTML
+        listContainer.innerHTML = '';
 
-                // Iterate through the movie results
-                movies.forEach((movie) => {
-                    // Create a movie card element
-                    const movieCard = document.createElement('div');
-                    movieCard.classList.add('list-el', 'callout', 'secondary');
+        // Iterate through the movie results
+        movies.forEach((movie) => {
+            let imdbID = movie.id;
+            console.log(imdbID);
 
-                    // Create and set the movie title element
-                    const title = document.createElement('h3');
-                    title.classList.add('movie-title');
-                    title.textContent = movie.titleText.text;
 
-                    // Create and set the movie description element if year exist
-                    const releaseYear = movie.releaseYear
-                    if (releaseYear) {
-                        var description = document.createElement('p');
-                        description.classList.add('movie-description');
-                        description.textContent = `Release Year: ${movie.releaseYear.year}`;
-                        movieCard.appendChild(description);
-                    }
+            //construct apiUrl2 using imdbID from first api results
+            const imdbQuery = '&imdb_id=' + imdbID;
+            console.log(imdbQuery)
+            let apiUrl2 = `https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us${imdbQuery}`
 
-                    // create and set movie poster image if image exist
-                    const posterURl = movie.primaryImage
-                    if (posterURl) {
-                        var poster = document.createElement('img');
-                        poster.classList.add('movie-poster');
-                        poster.src = movie.primaryImage.url;
-                        poster.alt = movie.titleText.text;
-                        movieCard.appendChild(poster);
-                    }
+            fetch(apiUrl2, options2)
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            
         
-                    // Append the title and description to the movie card
-                    movieCard.appendChild(title);
-                    
-                    
+
+        //const movies2 = data.result    //////// this is where im at with the code, api2 gives data for every movie in the console. try it out.
+
+            // Create a movie card element
+            let movieCard = document.createElement('div');
+            movieCard.classList.add('list-el', 'callout', 'secondary');
+
+            // Create and set the movie title element
+            const title = document.createElement('h3');
+            title.classList.add('movie-title');
+            title.textContent = movie.titleText.text;
         
-                    // Append the movie card to the list container
-                    listContainer.appendChild(movieCard);
+
+            // Create and set the movie description element if year exist
+            const releaseYear = movie.releaseYear
+            if (releaseYear) {
+                var description = document.createElement('p');
+                description.classList.add('movie-description');
+                description.textContent = `Release Year: ${movie.releaseYear.year}`;
+                movieCard.appendChild(description);
+            }
+
+            // create and set movie poster image if image exist
+            const posterURl = movie.primaryImage
+            if (posterURl) {
+                var poster = document.createElement('img');
+                poster.classList.add('movie-poster');
+                poster.src = movie.primaryImage.url;
+                poster.alt = movie.titleText.text;
+                movieCard.appendChild(poster);
+            }
+        
+            // Append the title and description to the movie card
+            movieCard.appendChild(title);
+            
+            
+
+            // Append the movie card to the list container
+            listContainer.appendChild(movieCard);
                 });
             } catch (err) {
                 // Log any errors to the console
