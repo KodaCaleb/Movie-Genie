@@ -175,7 +175,7 @@ searchButton.addEventListener('click', async () => {
                 if (synopsis) {
                     var description = document.createElement('p');
                     description.classList.add('movie-description');
-                    description.textContent = `Release Year: ${data2.result.overview}`;
+                    description.textContent = `Synopsis: ${data2.result.overview}`;
                     movieCard.appendChild(description);
                 }
 
