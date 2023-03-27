@@ -171,11 +171,11 @@ searchButton.addEventListener('click', async () => {
                 console.log(platforms);
 
                 // Create and set the movie description element if year exist
-                const releaseYear = movie.releaseYear
-                if (releaseYear) {
+                const synopsis = data2.result.overview
+                if (synopsis) {
                     var description = document.createElement('p');
                     description.classList.add('movie-description');
-                    description.textContent = `Release Year: ${movie.releaseYear.year}`;
+                    description.textContent = `Release Year: ${data2.result.overview}`;
                     movieCard.appendChild(description);
                 }
 
