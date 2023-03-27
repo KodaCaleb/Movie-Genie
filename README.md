@@ -17,7 +17,7 @@ https://github.com/KodaCaleb/Project-1
 
 ## screenshot of deployed application
 
-![Screenshot](./Assets/MovieGenieSC.png)
+![Screenshot](./assets/MovieGenieSC.png)
 
 
 ## License
